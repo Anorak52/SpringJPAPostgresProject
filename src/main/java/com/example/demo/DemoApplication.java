@@ -1,7 +1,9 @@
 package com.example.demo;
 
+import com.example.demo.entity.Address;
 import com.example.demo.entity.Passport;
 import com.example.demo.entity.Person;
+import com.example.demo.entity.Phone;
 import com.example.demo.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -24,18 +26,38 @@ public class DemoApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-        Person anna = new Person("Anna", "Andreeva", "Samara");
-        Person olesya = new Person("Olesya", "Andreeva", "Moscow");
-        Person alex = new Person("Alex", "Andreev", "Omsk");
 
-		Passport passportAnna = new Passport("A11111");
-		Passport passportOlesya = new Passport("B22222");
+		Person anna = new Person("Anna", "Andreeva");
+		Person olesya = new Person("Olesya", "Andreeva");
+
+		//passports
+		Passport passportAnna = new Passport("A1111111");
+		Passport passportOlesya = new Passport("M3333333");
+
+		//phones
+		Phone phone1 = new Phone("123-123-123");
+		Phone phone2 = new Phone("222-222-222");
+		Phone phone3 = new Phone("333-333-333");
+		Phone phone4 = new Phone("444-444-444");
+
+		//addresses
+		Address address1 = new Address("Samara");
+		Address address2 = new Address("Omsk");
+		Address address3 = new Address("Novosibirsk");
+		Address address4 = new Address("Moscow");
 
 		anna.setPassport(passportAnna);
+		anna.setPhones(Arrays.asList(phone1, phone2));
+		anna.setAddresses(Arrays.asList(address1, address2));
+
 		olesya.setPassport(passportOlesya);
+		olesya.setPhones(Arrays.asList(phone3, phone4));
+		olesya.setAddresses(Arrays.asList(address3, address4));
 
-		List<Person> people = Arrays.asList(anna, olesya, alex);
+		List<Person> people = Arrays.asList(anna, olesya);
 
-        personRepository.saveAll(people);
+		personRepository.saveAll(people);
+
+		System.out.println("<<<<<< Initialized >>>>>>>");
 	}
 }
